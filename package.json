@@ -1,0 +1,16 @@
+{
+  "name": "ptn",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "author": "Jono Davis",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1100.0",
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^3.2.3"
+  },
+  "scripts": {
+    "start": "node ptn.mjs"
+  }
+}
