@@ -1,6 +1,6 @@
 # ptn 🗞️
 
-Need to read the news but stuck out in the bush with only one bar of 3G? Only have a few kilobytes of precious cellular data left and really need to read the news? You'll love ptn ❤️
+Need to read the news but stuck out in the bush with only one bar of 3G? Only have a few kilobytes of precious cellular data left and really need to read the news? You'll love ptn! ❤️
 
 ptn (plain text news) is the service which runs [news.pancake.nz](https://news.pancake.nz) (and maybe another domain in the future). The goal of ptn is to provide an up to date index of news headlines as efficiently as possible. At the moment the homepage is only ~6.4kB depending on the headlines that day. Single source pages are usually ~5kB.
 
