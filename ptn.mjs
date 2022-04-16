@@ -89,6 +89,7 @@ const genSourcePage = async (data, slug) => {
   .mt-1 { margin-top: 0.25rem; }
   .mr-1 { margin-right: 0.25rem; }
   .float-left { float: left; }
+  .leading-5 { line-height: 1.25rem; }
   </style>
   `;
   let head = `
@@ -181,7 +182,7 @@ const genSourcePage = async (data, slug) => {
               </span>`
                 : ""
             }
-            <a href="${story.url}" target="_blank" class="text-blue">${
+            <a href="${story.url}" target="_blank" class="text-blue leading-5">${
             story.title
           }</a>
             <p class="text-xs">${story.description}</p>
