@@ -209,6 +209,110 @@ const genSourcePage = async (data, slug) => {
   </html>
   `;
 
+  const genSourcePage1News = async (slug) => {
+    let styles = `
+    <style>
+    body {
+      margin: 0;
+      line-height: inherit;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+      --blue: rgb(37 99 235);
+      --gray: rgb(107 114 128);
+    }
+    h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+    blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre {
+      margin: 0;
+    }
+    a { text-decoration: inherit; color: var(--blue); }
+    .container { width: 400px; margin: auto; }
+  
+    /* small tailwind-like styles */
+    .mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+    .my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+    .text-center { text-align: center; }
+    .font-bold { font-weight: 700; }
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .flex { display: flex; }
+    .text-blue { color: var(--blue); }
+    .justify-between { justify-content: space-between; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .text-right { text-align: right; }
+    .text-gray { color: var(--gray); }
+    .w-full { width: 100%; }
+    .mt-8 { margin-top: 2rem; }
+    .my-8 { margin-top: 2rem; margin-bottom: 2rem; }
+    .text-red-800 { color: rgb(153 27 27); }
+    .bg-red-200 { background-color: rgb(254 202 202); }
+    .bg-gray-200 { background-color: rgb(229 231 235); }
+    .rounded-full { border-radius: 9999px; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mr-1 { margin-right: 0.25rem; }
+    .float-left { float: left; }
+    .leading-5 { line-height: 1.25rem; }
+    </style>
+    `;
+    let head = `
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>Plain Text News</title>
+    <meta name="description" content="Instant NZ News Headlines" />
+    <link rel="icon" href="/favicon.ico" />
+    ${styles}
+    `;
+    let nav = `
+    <div class="flex justify-between mb-6 text-blue">
+      <a href="/rnz" ${slug == "rnz" ? `class="font-bold"` : ""}>RNZ</a>
+      <a href="/nzherald" ${
+        slug == "nzherald" ? `class="font-bold"` : ""
+      }>NZ Herald</a>
+      <a href="/stuff" ${slug == "stuff" ? `class="font-bold"` : ""}>Stuff</a>
+      <a href="/1news" ${slug == "1news" ? `class="font-bold"` : ""}>1News</a>
+      <a href="/newshub" ${
+        slug == "newshub" ? `class="font-bold"` : ""
+      }>Newshub</a>
+    </div> 
+    `;
+    let body = `
+    <div class="container">
+      <div class="mx-2">
+        <header class="my-4 text-center">
+          <a href="/">
+            <h1 class="font-bold">Plain Text News</h1>
+          </a>
+            <p class="text-xs" id="date">${new Date(
+              Date.now()
+            ).toDateString()}</p>
+        </header>
+        ${nav}
+        <div class="flex justify-between text-xs">
+          <p>Last Updated: <span id="time">${new Date(
+            data.lastUpdate
+          ).toLocaleTimeString()}</span></p>
+          <p>~<span id="time-since">2 minutes</span> ago</p>
+        </div>
+        <p class="text-xs text-right text-gray mb-4">refresh to get latest</p>
+          <iframe src="https://www.1news.co.nz/" title="1News"></iframe> 
+        <div class="w-full mt-8 text-center">
+          <a href="#">Back to top</a>
+        </div>
+        <footer class="my-8 text-center text-xs">
+          <p>Made With 💜 in Tāmaki Makaurau</p>
+          <a href="https://pancake.nz">pancake.nz</a>
+        </footer>
+      </div>
+    </div>
+    ${script}
+    `;
+    let final = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>${head}</head>
+      <body>${body}</body>
+    </html>
+    `;
+
   // Upload HTML string as a file to S3 bucket
   const params = {
     Bucket: process.env.BUCKET_NAME,
@@ -282,7 +386,7 @@ const main = async () => {
         genSourcePage(rnz, "rnz"),
         genSourcePage(nzHerald, "nzherald"),
         genSourcePage(stuff, "stuff"),
-        genSourcePage(oneNews, "1news"),
+        genSourcePage1News("1news"),
         genSourcePage(newshub, "newshub"),
         genSourcePage(orderedHighlights, "index.html"),
       ]);
