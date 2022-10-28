@@ -149,7 +149,6 @@ export const get1News = async () => {
       // push the link to the stories array if there is still space
       if (stories.length < 20) {
         if (!stories.some((story) => story.url === url)) {
-          console.log("adding story", i);
           stories.push({
             url: url,
           });
