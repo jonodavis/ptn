@@ -213,10 +213,3 @@ export const getNewshub = async () => {
     console.error(err);
   }
 };
-
-const main = async () => {
-  const news = await get1News();
-  console.log(news);
-};
-
-main();
