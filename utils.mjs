@@ -140,17 +140,21 @@ export const get1News = async () => {
       await fetch("https://www.1news.co.nz/").then((res) => res.text())
     );
     // loop through all the story links
-    $(".simple-list-anchor").each((i, link) => {
+    $(".story").each((i, link) => {
       // promise for getting meta description from link
+      link = $(link).find("a").first();
       const url = $(link).attr("href").startsWith("https://")
         ? $(link).attr("href")
         : `https://www.1news.co.nz${$(link).attr("href")}`;
-      proms.push(getStoryPage(url));
       // push the link to the stories array if there is still space
       if (stories.length < 20) {
-        stories.push({
-          url: url,
-        });
+        if (!stories.some((story) => story.url === url)) {
+          console.log("adding story", i);
+          stories.push({
+            url: url,
+          });
+          proms.push(getStoryPage(url));
+        }
       } else {
         return false; // exit our loop early, we already have the top 20 stories
       }
@@ -209,3 +213,10 @@ export const getNewshub = async () => {
     console.error(err);
   }
 };
+
+const main = async () => {
+  const news = await get1News();
+  console.log(news);
+};
+
+main();
