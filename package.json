@@ -1,16 +1,14 @@
 {
-  "name": "ptn",
-  "version": "1.0.0",
-  "main": "index.mjs",
-  "author": "Jono Davis",
-  "license": "MIT",
-  "dependencies": {
-    "aws-sdk": "^2.1100.0",
-    "cheerio": "^1.0.0-rc.10",
-    "dotenv": "^16.0.0",
-    "node-fetch": "^3.2.3"
-  },
   "scripts": {
-    "start": "node ptn.mjs"
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^3.10.4",
+    "htmlparser2": "^9.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230914.0",
+    "wrangler": "^3.15.0"
   }
 }
