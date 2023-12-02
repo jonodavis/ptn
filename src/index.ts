@@ -25,7 +25,7 @@ app.get(
   cache({
     cacheName: "news",
     cacheControl: "max-age=0, stale-while-revalidate=60",
-  })
+  }),
 );
 app.use("*", logger());
 app.get("/", (c) => c.redirect("/rnz"));
