@@ -57,7 +57,6 @@ export function generateHtml(feed: Feed, slug: Slug) {
     <meta charset="utf-8" />
     <title>Plain Text News</title>
     <meta name="description" content="Instant NZ News Headlines" />
-    <link rel="icon" href="/favicon.ico" />
     ${styles}
     `;
   let nav = `

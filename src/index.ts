@@ -9,6 +9,7 @@ const URLS: Record<Slug, string> = {
   nzh: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/curated/78/?outputType=xml&_website=nzh",
   stuff: "https://www.stuff.co.nz/rss",
 };
+const SLUGS: Slug[] = ["nzh", "rnz", "stuff"];
 
 async function fetchFeed(slug: Slug) {
   const res = await fetch(URLS[slug]);
@@ -28,8 +29,10 @@ app.get(
 );
 app.use("*", logger());
 app.get("/", (c) => c.redirect("/rnz"));
-app.get("/rnz", (c) => c.html(fetchFeed("rnz")));
-app.get("/nzh", (c) => c.html(fetchFeed("nzh")));
-app.get("/stuff", (c) => c.html(fetchFeed("stuff")));
+app.get("/:slug", (c) => {
+  const slug = c.req.param("slug") as Slug;
+  if (!SLUGS.includes(slug)) throw new Error("Not supported");
+  return c.html(fetchFeed(slug));
+});
 
 export default app;
